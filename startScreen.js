@@ -159,7 +159,7 @@ function drawFileSelectScreen() {
   
   // Título SELECT FILE
   ctx.fillStyle = '#ffffff';
-  const titleSize = isMobile ? 16 : 42;
+  const titleSize = isMobile ? 12 : 42;
   ctx.font = `bold ${titleSize}px "Courier New", monospace`;
   ctx.textAlign = 'center';
   ctx.shadowColor = '#ff6b00';
@@ -167,19 +167,19 @@ function drawFileSelectScreen() {
   ctx.shadowOffsetY = isMobile ? 1 : 4;
   ctx.shadowBlur = 0;
   ctx.letterSpacing = isMobile ? '1px' : '6px';
-  ctx.fillText('SELECT FILE', canvas.width / 2, isMobile ? 30 : 100);
+  ctx.fillText('SELECT FILE', canvas.width / 2, isMobile ? 20 : 100);
   ctx.shadowColor = 'transparent';
   
   // Layout responsivo dos files
   let fileWidth, fileHeight, gap, startX, startY;
   
   if (isMobile) {
-    // Mobile: apenas 2 files, bem compactos
-    fileWidth = Math.min(230, canvas.width * 0.8);
-    fileHeight = 100;
-    gap = 12;
+    // Mobile: apenas 2 files, ULTRA compactos
+    fileWidth = Math.min(180, canvas.width * 0.75);
+    fileHeight = 70;
+    gap = 8;
     startX = (canvas.width - fileWidth) / 2;
-    startY = 55;
+    startY = 35;
   } else {
     // Desktop: 3 files em linha
     fileWidth = 350;
@@ -229,8 +229,8 @@ function drawFileSelectScreen() {
     }
     
     // Header com borda
-    const headerPadding = isMobile ? 8 : 30;
-    const headerY = isMobile ? 20 : 70;
+    const headerPadding = isMobile ? 6 : 30;
+    const headerY = isMobile ? 15 : 70;
     ctx.strokeStyle = isSelected ? '#ff6b00' : '#333333';
     ctx.lineWidth = 1;
     ctx.beginPath();
@@ -240,38 +240,38 @@ function drawFileSelectScreen() {
     
     // "FILE X"
     ctx.fillStyle = isSelected ? '#ff6b00' : '#ffffff';
-    const fileTextSize = isMobile ? 11 : 24;
+    const fileTextSize = isMobile ? 9 : 24;
     ctx.font = `bold ${fileTextSize}px "Courier New", monospace`;
     ctx.textAlign = 'left';
-    ctx.letterSpacing = isMobile ? '1px' : '2px';
-    ctx.fillText(`FILE ${file.id}`, x + headerPadding, y + (isMobile ? 15 : 50));
+    ctx.letterSpacing = isMobile ? '0px' : '2px';
+    ctx.fillText(`FILE ${file.id}`, x + headerPadding, y + (isMobile ? 11 : 50));
     
     // Seta se selecionado
     if (isSelected) {
       ctx.fillStyle = '#ff6b00';
-      ctx.font = `${isMobile ? 10 : 20}px "Courier New", monospace`;
+      ctx.font = `${isMobile ? 8 : 20}px "Courier New", monospace`;
       ctx.textAlign = 'right';
-      ctx.fillText('►', x + fileWidth - headerPadding, y + (isMobile ? 15 : 50));
+      ctx.fillText('►', x + fileWidth - headerPadding, y + (isMobile ? 11 : 50));
     }
     
     // Conteúdo do file
     if (file.exists) {
-      let contentY = y + (isMobile ? 30 : 110);
-      const contentPadding = isMobile ? 8 : 30;
-      const labelSize = isMobile ? 7 : 14;
-      const valueSize = isMobile ? 10 : 20;
-      const spacing = isMobile ? 20 : 70;
+      let contentY = y + (isMobile ? 22 : 110);
+      const contentPadding = isMobile ? 6 : 30;
+      const labelSize = isMobile ? 6 : 14;
+      const valueSize = isMobile ? 8 : 20;
+      const spacing = isMobile ? 14 : 70;
       
       // NAME
       ctx.fillStyle = '#999999';
       ctx.font = `${labelSize}px "Courier New", monospace`;
       ctx.textAlign = 'left';
-      ctx.letterSpacing = '1px';
+      ctx.letterSpacing = '0px';
       ctx.fillText('NAME', x + contentPadding, contentY);
       
       ctx.fillStyle = '#ffffff';
       ctx.font = `bold ${valueSize}px "Courier New", monospace`;
-      ctx.fillText(file.playerName, x + contentPadding, contentY + (isMobile ? 11 : 28));
+      ctx.fillText(file.playerName, x + contentPadding, contentY + (isMobile ? 9 : 28));
       
       contentY += spacing;
       
@@ -282,9 +282,9 @@ function drawFileSelectScreen() {
       
       ctx.fillStyle = '#ffffff';
       ctx.font = `${valueSize}px "Courier New", monospace`;
-      ctx.fillText(file.playtime, x + contentPadding, contentY + (isMobile ? 10 : 25));
+      ctx.fillText(file.playtime, x + contentPadding, contentY + (isMobile ? 8 : 25));
       
-      contentY += isMobile ? 19 : 60;
+      contentY += isMobile ? 13 : 60;
       
       // LOCATION
       ctx.fillStyle = '#999999';
@@ -293,15 +293,15 @@ function drawFileSelectScreen() {
       
       ctx.fillStyle = '#ffffff';
       ctx.font = `${valueSize}px "Courier New", monospace`;
-      ctx.fillText(file.location, x + contentPadding, contentY + (isMobile ? 10 : 25));
+      ctx.fillText(file.location, x + contentPadding, contentY + (isMobile ? 8 : 25));
     } else {
       // EMPTY
       ctx.fillStyle = '#333333';
-      const emptySize = isMobile ? 14 : 24;
+      const emptySize = isMobile ? 10 : 24;
       ctx.font = `bold ${emptySize}px "Courier New", monospace`;
       ctx.textAlign = 'center';
-      ctx.letterSpacing = isMobile ? '2px' : '3px';
-      ctx.fillText('EMPTY', x + fileWidth / 2, y + fileHeight / 2 + (isMobile ? 3 : 10));
+      ctx.letterSpacing = isMobile ? '1px' : '3px';
+      ctx.fillText('EMPTY', x + fileWidth / 2, y + fileHeight / 2 + (isMobile ? 2 : 10));
     }
     
     ctx.globalAlpha = 1;
@@ -309,13 +309,13 @@ function drawFileSelectScreen() {
   
   // Botões CONTINUE e BACK
   const lastFileY = isMobile 
-    ? startY + (1 * (fileHeight + gap)) + fileHeight  // Apenas 2 files agora
+    ? startY + (1 * (fileHeight + gap)) + fileHeight
     : startY + fileHeight;
   
-  const btnY = lastFileY + (isMobile ? 18 : 70);
-  const btnWidth = isMobile ? 105 : 250;
-  const btnHeight = isMobile ? 35 : 70;
-  const btnGap = isMobile ? 12 : 40;
+  const btnY = lastFileY + (isMobile ? 12 : 70);
+  const btnWidth = isMobile ? 85 : 250;
+  const btnHeight = isMobile ? 28 : 70;
+  const btnGap = isMobile ? 8 : 40;
   const continueX = canvas.width / 2 - btnWidth - btnGap / 2;
   const backX = canvas.width / 2 + btnGap / 2;
   
@@ -328,11 +328,11 @@ function drawFileSelectScreen() {
   ctx.strokeRect(continueX, btnY, btnWidth, btnHeight);
   
   ctx.fillStyle = canContinue ? '#00ff00' : '#666666';
-  const btnTextSize = isMobile ? 9 : 20;
+  const btnTextSize = isMobile ? 8 : 20;
   ctx.font = `bold ${btnTextSize}px "Courier New", monospace`;
   ctx.textAlign = 'center';
-  ctx.letterSpacing = isMobile ? '1px' : '2px';
-  ctx.fillText('CONTINUE', continueX + btnWidth / 2, btnY + (isMobile ? 22 : 45));
+  ctx.letterSpacing = isMobile ? '0px' : '2px';
+  ctx.fillText('CONTINUE', continueX + btnWidth / 2, btnY + (isMobile ? 18 : 45));
   
   // Botão BACK
   ctx.fillStyle = '#000000';
@@ -343,7 +343,7 @@ function drawFileSelectScreen() {
   
   ctx.fillStyle = '#ff0000';
   ctx.font = `bold ${btnTextSize}px "Courier New", monospace`;
-  ctx.fillText('BACK', backX + btnWidth / 2, btnY + (isMobile ? 22 : 45));
+  ctx.fillText('BACK', backX + btnWidth / 2, btnY + (isMobile ? 18 : 45));
   
   // Armazena posições dos botões
   window.continueButton = { x: continueX, y: btnY, width: btnWidth, height: btnHeight };
