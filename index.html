@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Jogofólio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="rotateWarning">
+    <div class="icon">📱</div>
+    <h2>Gire seu dispositivo</h2>
+    <p>Este jogo funciona melhor no modo vertical</p>
+  </div>
+
+  <canvas id="game"></canvas>
+
+  <div id="cinemaOverlay" style="display: none;">
+    <iframe
+      id="cinemaIframe"
+      src=""
+      frameborder="0"
+      allow="autoplay; encrypted-media"
+      allowfullscreen>
+    </iframe>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="assets.js"></script>
+  <script src="collision.js"></script>
+  <script src="camera.js"></script>
+  <script src="player.js"></script>
+  <script src="input.js"></script>
+  <script src="npcs.js"></script>
+  <script src="render.js"></script>
+  <script src="startScreen.js"></script>
+  <script src="script.js"></script>
+  <script src="mobile.js"></script>
+</body>
+</html>
